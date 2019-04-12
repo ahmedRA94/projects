@@ -1,0 +1,216 @@
+
+slave.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000000f2  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .comment      00000030  00000000  00000000  00000146  2**0
+                  CONTENTS, READONLY
+  2 .debug_aranges 00000058  00000000  00000000  00000176  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  3 .debug_info   00000242  00000000  00000000  000001ce  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_abbrev 00000182  00000000  00000000  00000410  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_line   000001e2  00000000  00000000  00000592  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_frame  00000078  00000000  00000000  00000774  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_str    0000019a  00000000  00000000  000007ec  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_loc    000000b1  00000000  00000000  00000986  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_ranges 00000038  00000000  00000000  00000a37  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+   8:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+   c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  10:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  14:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  18:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  1c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  20:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  24:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  28:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  2c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  30:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  34:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  38:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  3c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  40:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  44:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  48:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  4c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  50:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+  60:	0e 94 6b 00 	call	0xd6	; 0xd6 <main>
+  64:	0c 94 77 00 	jmp	0xee	; 0xee <_exit>
+
+00000068 <__bad_interrupt>:
+  68:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+0000006c <I2C_Slave_Init>:
+
+
+#include "I2C_SLAVE.h"
+void I2C_Slave_Init(uint8_t slave_address)
+{
+	TWAR=slave_address;		/* Assign Address in TWI address register */
+  6c:	82 b9       	out	0x02, r24	; 2
+	TWCR=(1<<TWEN)|(1<<TWEA)|(1<<TWINT);/* Enable TWI, Enable ack generation */
+  6e:	84 ec       	ldi	r24, 0xC4	; 196
+  70:	86 bf       	out	0x36, r24	; 54
+  72:	08 95       	ret
+
+00000074 <I2C_Slave_Listen>:
+int8_t I2C_Slave_Listen()
+{
+	while(1)
+	{
+		uint8_t status;			/* Declare variable */
+		while(!(TWCR&(1<<TWINT)));	/* Wait to be addressed */
+  74:	06 b6       	in	r0, 0x36	; 54
+  76:	07 fe       	sbrs	r0, 7
+  78:	fd cf       	rjmp	.-6      	; 0x74 <I2C_Slave_Listen>
+		status=TWSR&0xF8;		/* Read TWI status register */
+  7a:	81 b1       	in	r24, 0x01	; 1
+  7c:	98 2f       	mov	r25, r24
+  7e:	98 7f       	andi	r25, 0xF8	; 248
+		if(status==0x60||status==0x68)	/* Own SLA+W received &ack returned */
+  80:	80 7f       	andi	r24, 0xF0	; 240
+  82:	80 36       	cpi	r24, 0x60	; 96
+  84:	41 f0       	breq	.+16     	; 0x96 <I2C_Slave_Listen+0x22>
+		return 0;			/* Return 0 to indicate ack returned */
+		if(status==0xA8||status==0xB0)	/* Own SLA+R received &ack returned */
+  86:	98 3a       	cpi	r25, 0xA8	; 168
+  88:	41 f0       	breq	.+16     	; 0x9a <I2C_Slave_Listen+0x26>
+  8a:	90 3b       	cpi	r25, 0xB0	; 176
+  8c:	41 f0       	breq	.+16     	; 0x9e <I2C_Slave_Listen+0x2a>
+		return 1;			/* Return 0 to indicate ack returned */
+		if(status==0x70||status==0x78)	/* General call received &ack returned */
+  8e:	80 37       	cpi	r24, 0x70	; 112
+  90:	89 f7       	brne	.-30     	; 0x74 <I2C_Slave_Listen>
+		return 2;			/* Return 1 to indicate ack returned */
+  92:	82 e0       	ldi	r24, 0x02	; 2
+  94:	08 95       	ret
+	{
+		uint8_t status;			/* Declare variable */
+		while(!(TWCR&(1<<TWINT)));	/* Wait to be addressed */
+		status=TWSR&0xF8;		/* Read TWI status register */
+		if(status==0x60||status==0x68)	/* Own SLA+W received &ack returned */
+		return 0;			/* Return 0 to indicate ack returned */
+  96:	80 e0       	ldi	r24, 0x00	; 0
+  98:	08 95       	ret
+		if(status==0xA8||status==0xB0)	/* Own SLA+R received &ack returned */
+		return 1;			/* Return 0 to indicate ack returned */
+  9a:	81 e0       	ldi	r24, 0x01	; 1
+  9c:	08 95       	ret
+  9e:	81 e0       	ldi	r24, 0x01	; 1
+		if(status==0x70||status==0x78)	/* General call received &ack returned */
+		return 2;			/* Return 1 to indicate ack returned */
+		else
+		continue;			/* Else continue */
+	}
+}
+  a0:	08 95       	ret
+
+000000a2 <I2C_Slave_Receive>:
+}
+//**************************************************************************************************************************************************************************************************************************************
+char I2C_Slave_Receive()
+{
+	uint8_t status;		/* Declare variable */
+	TWCR=(1<<TWEN)|(1<<TWEA)|(1<<TWINT);/* Enable TWI & generation of ack */
+  a2:	84 ec       	ldi	r24, 0xC4	; 196
+  a4:	86 bf       	out	0x36, r24	; 54
+	while(!(TWCR&(1<<TWINT)));	/* Wait until TWI finish its current job */
+  a6:	06 b6       	in	r0, 0x36	; 54
+  a8:	07 fe       	sbrs	r0, 7
+  aa:	fd cf       	rjmp	.-6      	; 0xa6 <I2C_Slave_Receive+0x4>
+	status=TWSR&0xF8;		/* Read TWI status register */
+  ac:	91 b1       	in	r25, 0x01	; 1
+	if(status==0x80||status==0x90)/* Check for data received &ack returned */
+  ae:	89 2f       	mov	r24, r25
+  b0:	88 7e       	andi	r24, 0xE8	; 232
+  b2:	80 38       	cpi	r24, 0x80	; 128
+  b4:	11 f4       	brne	.+4      	; 0xba <I2C_Slave_Receive+0x18>
+	return TWDR;		/* If yes then return received data */
+  b6:	83 b1       	in	r24, 0x03	; 3
+  b8:	08 95       	ret
+
+	/* Check for data received, nack returned & switched to not addressed slave mode */
+	if(status==0x88||status==0x98)
+  ba:	88 38       	cpi	r24, 0x88	; 136
+  bc:	11 f4       	brne	.+4      	; 0xc2 <I2C_Slave_Receive+0x20>
+	return TWDR;		/* If yes then return received data */
+  be:	83 b1       	in	r24, 0x03	; 3
+  c0:	08 95       	ret
+char I2C_Slave_Receive()
+{
+	uint8_t status;		/* Declare variable */
+	TWCR=(1<<TWEN)|(1<<TWEA)|(1<<TWINT);/* Enable TWI & generation of ack */
+	while(!(TWCR&(1<<TWINT)));	/* Wait until TWI finish its current job */
+	status=TWSR&0xF8;		/* Read TWI status register */
+  c2:	98 7f       	andi	r25, 0xF8	; 248
+	return TWDR;		/* If yes then return received data */
+
+	/* Check for data received, nack returned & switched to not addressed slave mode */
+	if(status==0x88||status==0x98)
+	return TWDR;		/* If yes then return received data */
+	if(status==0xA0)		/* Check wether STOP/REPEATED START */
+  c4:	90 3a       	cpi	r25, 0xA0	; 160
+  c6:	29 f4       	brne	.+10     	; 0xd2 <I2C_Slave_Receive+0x30>
+	{
+		TWCR|=(1<<TWINT);	/* Clear interrupt flag & return -1 */
+  c8:	86 b7       	in	r24, 0x36	; 54
+  ca:	80 68       	ori	r24, 0x80	; 128
+  cc:	86 bf       	out	0x36, r24	; 54
+		return -1;
+  ce:	8f ef       	ldi	r24, 0xFF	; 255
+  d0:	08 95       	ret
+	}
+	else
+	return -2;			/* Else return -2 */
+  d2:	8e ef       	ldi	r24, 0xFE	; 254
+  d4:	08 95       	ret
+
+000000d6 <main>:
+#include <avr/io.h>
+#include <util/delay.h>
+#include "I2C_SLAVE.h"
+
+int main(void)
+{I2C_Slave_Init(0x40);
+  d6:	80 e4       	ldi	r24, 0x40	; 64
+  d8:	0e 94 36 00 	call	0x6c	; 0x6c <I2C_Slave_Init>
+	DDRB=0xff;
+  dc:	8f ef       	ldi	r24, 0xFF	; 255
+  de:	87 bb       	out	0x17, r24	; 23
+	PORTB=0x00;
+  e0:	18 ba       	out	0x18, r1	; 24
+    while(1)
+    {   I2C_Slave_Listen();
+  e2:	0e 94 3a 00 	call	0x74	; 0x74 <I2C_Slave_Listen>
+		PORTB=I2C_Slave_Receive();
+  e6:	0e 94 51 00 	call	0xa2	; 0xa2 <I2C_Slave_Receive>
+  ea:	88 bb       	out	0x18, r24	; 24
+  ec:	fa cf       	rjmp	.-12     	; 0xe2 <main+0xc>
+
+000000ee <_exit>:
+  ee:	f8 94       	cli
+
+000000f0 <__stop_program>:
+  f0:	ff cf       	rjmp	.-2      	; 0xf0 <__stop_program>
