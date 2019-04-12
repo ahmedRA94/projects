@@ -1,0 +1,1164 @@
+
+RTC interfacing with atmega32.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         0000059e  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         0000007e  00800060  0000059e  00000632  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          0000001b  008000de  008000de  000006b0  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  000006b0  2**0
+                  CONTENTS, READONLY
+  4 .debug_aranges 000000f0  00000000  00000000  000006e0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00001155  00000000  00000000  000007d0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 0000043d  00000000  00000000  00001925  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   0000061f  00000000  00000000  00001d62  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  000001dc  00000000  00000000  00002384  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    00000381  00000000  00000000  00002560  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    00000713  00000000  00000000  000028e1  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 000000c0  00000000  00000000  00002ff4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   8:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  10:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  14:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  18:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  1c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  20:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  24:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  28:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  2c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  30:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  34:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  38:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  3c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  40:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  44:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  48:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  4c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  50:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	ee e9       	ldi	r30, 0x9E	; 158
+  68:	f5 e0       	ldi	r31, 0x05	; 5
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+  70:	ae 3d       	cpi	r26, 0xDE	; 222
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
+
+00000076 <__do_clear_bss>:
+  76:	20 e0       	ldi	r18, 0x00	; 0
+  78:	ae ed       	ldi	r26, 0xDE	; 222
+  7a:	b0 e0       	ldi	r27, 0x00	; 0
+  7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
+
+0000007e <.do_clear_bss_loop>:
+  7e:	1d 92       	st	X+, r1
+
+00000080 <.do_clear_bss_start>:
+  80:	a9 3f       	cpi	r26, 0xF9	; 249
+  82:	b2 07       	cpc	r27, r18
+  84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
+  86:	0e 94 be 01 	call	0x37c	; 0x37c <main>
+  8a:	0c 94 cd 02 	jmp	0x59a	; 0x59a <_exit>
+
+0000008e <__bad_interrupt>:
+  8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000092 <I2C_Init>:
+ */ 
+#include "I2C_MASTER.h"
+
+void I2C_Init()			/* I2C initialize function */
+{
+	TWBR =BITRATE(TWSR =0x00);	/* Get bit rate register value by formula */
+  92:	11 b8       	out	0x01, r1	; 1
+  94:	80 e2       	ldi	r24, 0x20	; 32
+  96:	80 b9       	out	0x00, r24	; 0
+  98:	08 95       	ret
+
+0000009a <I2C_Start>:
+
+//***************************************************************************************************************************************************************
+uint8_t I2C_Start(char write_address)/* I2C start function */
+{
+	uint8_t status;		/* Declare variable */
+	TWCR=(1<<TWSTA)|(1<<TWEN)|(1<<TWINT); /* Enable TWI, generate START */
+  9a:	94 ea       	ldi	r25, 0xA4	; 164
+  9c:	96 bf       	out	0x36, r25	; 54
+	while(!(TWCR&(1<<TWINT)));	/* Wait until TWI finish its current job */
+  9e:	06 b6       	in	r0, 0x36	; 54
+  a0:	07 fe       	sbrs	r0, 7
+  a2:	fd cf       	rjmp	.-6      	; 0x9e <I2C_Start+0x4>
+	status=TWSR&0xF8;		/* Read TWI status register */
+  a4:	91 b1       	in	r25, 0x01	; 1
+  a6:	98 7f       	andi	r25, 0xF8	; 248
+	if(status!=0x08)		/* Check weather START transmitted or not? */
+  a8:	98 30       	cpi	r25, 0x08	; 8
+  aa:	71 f4       	brne	.+28     	; 0xc8 <I2C_Start+0x2e>
+	return 0;			/* Return 0 to indicate start condition fail */
+	TWDR=write_address;		/* Write SLA+W in TWI data register */
+  ac:	83 b9       	out	0x03, r24	; 3
+	TWCR=(1<<TWEN)|(1<<TWINT);	/* Enable TWI & clear interrupt flag */
+  ae:	84 e8       	ldi	r24, 0x84	; 132
+  b0:	86 bf       	out	0x36, r24	; 54
+	while(!(TWCR&(1<<TWINT)));	/* Wait until TWI finish its current job */
+  b2:	06 b6       	in	r0, 0x36	; 54
+  b4:	07 fe       	sbrs	r0, 7
+  b6:	fd cf       	rjmp	.-6      	; 0xb2 <I2C_Start+0x18>
+	status=TWSR&0xF8;		/* Read TWI status register */
+  b8:	81 b1       	in	r24, 0x01	; 1
+  ba:	88 7f       	andi	r24, 0xF8	; 248
+	if(status==0x18)		/* Check for SLA+W transmitted &ack received */
+  bc:	88 31       	cpi	r24, 0x18	; 24
+  be:	31 f0       	breq	.+12     	; 0xcc <I2C_Start+0x32>
+	return 1;			/* Return 1 to indicate ack received */
+	if(status==0x20)		/* Check for SLA+W transmitted &nack received */
+  c0:	80 32       	cpi	r24, 0x20	; 32
+  c2:	31 f4       	brne	.+12     	; 0xd0 <I2C_Start+0x36>
+	return 2;			/* Return 2 to indicate nack received */
+  c4:	82 e0       	ldi	r24, 0x02	; 2
+  c6:	08 95       	ret
+	uint8_t status;		/* Declare variable */
+	TWCR=(1<<TWSTA)|(1<<TWEN)|(1<<TWINT); /* Enable TWI, generate START */
+	while(!(TWCR&(1<<TWINT)));	/* Wait until TWI finish its current job */
+	status=TWSR&0xF8;		/* Read TWI status register */
+	if(status!=0x08)		/* Check weather START transmitted or not? */
+	return 0;			/* Return 0 to indicate start condition fail */
+  c8:	80 e0       	ldi	r24, 0x00	; 0
+  ca:	08 95       	ret
+	TWDR=write_address;		/* Write SLA+W in TWI data register */
+	TWCR=(1<<TWEN)|(1<<TWINT);	/* Enable TWI & clear interrupt flag */
+	while(!(TWCR&(1<<TWINT)));	/* Wait until TWI finish its current job */
+	status=TWSR&0xF8;		/* Read TWI status register */
+	if(status==0x18)		/* Check for SLA+W transmitted &ack received */
+	return 1;			/* Return 1 to indicate ack received */
+  cc:	81 e0       	ldi	r24, 0x01	; 1
+  ce:	08 95       	ret
+	if(status==0x20)		/* Check for SLA+W transmitted &nack received */
+	return 2;			/* Return 2 to indicate nack received */
+	else
+	return 3;			/* Else return 3 to indicate SLA+W failed */
+  d0:	83 e0       	ldi	r24, 0x03	; 3
+}
+  d2:	08 95       	ret
+
+000000d4 <I2C_Repeated_Start>:
+//*******************************************************************************************************************************
+uint8_t I2C_Repeated_Start(char read_address) /* I2C repeated start function */
+{
+	uint8_t status;		/* Declare variable */
+	TWCR=(1<<TWSTA)|(1<<TWEN)|(1<<TWINT);/* Enable TWI, generate start */
+  d4:	94 ea       	ldi	r25, 0xA4	; 164
+  d6:	96 bf       	out	0x36, r25	; 54
+	while(!(TWCR&(1<<TWINT)));	/* Wait until TWI finish its current job */
+  d8:	06 b6       	in	r0, 0x36	; 54
+  da:	07 fe       	sbrs	r0, 7
+  dc:	fd cf       	rjmp	.-6      	; 0xd8 <I2C_Repeated_Start+0x4>
+	status=TWSR&0xF8;		/* Read TWI status register */
+  de:	91 b1       	in	r25, 0x01	; 1
+  e0:	98 7f       	andi	r25, 0xF8	; 248
+	if(status!=0x10)		/* Check for repeated start transmitted */
+  e2:	90 31       	cpi	r25, 0x10	; 16
+  e4:	71 f4       	brne	.+28     	; 0x102 <I2C_Repeated_Start+0x2e>
+	return 0;			/* Return 0 for repeated start condition fail */
+	TWDR=read_address;		/* Write SLA+R in TWI data register */
+  e6:	83 b9       	out	0x03, r24	; 3
+	TWCR=(1<<TWEN)|(1<<TWINT);	/* Enable TWI and clear interrupt flag */
+  e8:	84 e8       	ldi	r24, 0x84	; 132
+  ea:	86 bf       	out	0x36, r24	; 54
+	while(!(TWCR&(1<<TWINT)));	/* Wait until TWI finish its current job */
+  ec:	06 b6       	in	r0, 0x36	; 54
+  ee:	07 fe       	sbrs	r0, 7
+  f0:	fd cf       	rjmp	.-6      	; 0xec <I2C_Repeated_Start+0x18>
+	status=TWSR&0xF8;		/* Read TWI status register */
+  f2:	81 b1       	in	r24, 0x01	; 1
+  f4:	88 7f       	andi	r24, 0xF8	; 248
+	if(status==0x40)		/* Check for SLA+R transmitted &ack received */
+  f6:	80 34       	cpi	r24, 0x40	; 64
+  f8:	31 f0       	breq	.+12     	; 0x106 <I2C_Repeated_Start+0x32>
+	return 1;			/* Return 1 to indicate ack received */
+	if(status==0x48)		/* Check for SLA+R transmitted &nack received */
+  fa:	88 34       	cpi	r24, 0x48	; 72
+  fc:	31 f4       	brne	.+12     	; 0x10a <I2C_Repeated_Start+0x36>
+	return 2;			/* Return 2 to indicate nack received */
+  fe:	82 e0       	ldi	r24, 0x02	; 2
+ 100:	08 95       	ret
+	uint8_t status;		/* Declare variable */
+	TWCR=(1<<TWSTA)|(1<<TWEN)|(1<<TWINT);/* Enable TWI, generate start */
+	while(!(TWCR&(1<<TWINT)));	/* Wait until TWI finish its current job */
+	status=TWSR&0xF8;		/* Read TWI status register */
+	if(status!=0x10)		/* Check for repeated start transmitted */
+	return 0;			/* Return 0 for repeated start condition fail */
+ 102:	80 e0       	ldi	r24, 0x00	; 0
+ 104:	08 95       	ret
+	TWDR=read_address;		/* Write SLA+R in TWI data register */
+	TWCR=(1<<TWEN)|(1<<TWINT);	/* Enable TWI and clear interrupt flag */
+	while(!(TWCR&(1<<TWINT)));	/* Wait until TWI finish its current job */
+	status=TWSR&0xF8;		/* Read TWI status register */
+	if(status==0x40)		/* Check for SLA+R transmitted &ack received */
+	return 1;			/* Return 1 to indicate ack received */
+ 106:	81 e0       	ldi	r24, 0x01	; 1
+ 108:	08 95       	ret
+	if(status==0x48)		/* Check for SLA+R transmitted &nack received */
+	return 2;			/* Return 2 to indicate nack received */
+	else
+	return 3;			/* Else return 3 to indicate SLA+W failed */
+ 10a:	83 e0       	ldi	r24, 0x03	; 3
+}
+ 10c:	08 95       	ret
+
+0000010e <I2C_Write>:
+//********************************************************************************************************************************************
+uint8_t I2C_Write(char data)	/* I2C write function */
+{
+	uint8_t status;		/* Declare variable */
+	TWDR=data;			/* Copy data in TWI data register */
+ 10e:	83 b9       	out	0x03, r24	; 3
+	TWCR=(1<<TWEN)|(1<<TWINT);	/* Enable TWI and clear interrupt flag */
+ 110:	84 e8       	ldi	r24, 0x84	; 132
+ 112:	86 bf       	out	0x36, r24	; 54
+	while(!(TWCR&(1<<TWINT)));	/* Wait until TWI finish its current job */
+ 114:	06 b6       	in	r0, 0x36	; 54
+ 116:	07 fe       	sbrs	r0, 7
+ 118:	fd cf       	rjmp	.-6      	; 0x114 <I2C_Write+0x6>
+	status=TWSR&0xF8;		/* Read TWI status register */
+ 11a:	81 b1       	in	r24, 0x01	; 1
+ 11c:	88 7f       	andi	r24, 0xF8	; 248
+	if(status==0x28)		/* Check for data transmitted &ack received */
+ 11e:	88 32       	cpi	r24, 0x28	; 40
+ 120:	21 f0       	breq	.+8      	; 0x12a <I2C_Write+0x1c>
+	return 0;			/* Return 0 to indicate ack received */
+	if(status==0x30)		/* Check for data transmitted &nack received */
+ 122:	80 33       	cpi	r24, 0x30	; 48
+ 124:	21 f4       	brne	.+8      	; 0x12e <I2C_Write+0x20>
+	return 1;			/* Return 1 to indicate nack received */
+ 126:	81 e0       	ldi	r24, 0x01	; 1
+ 128:	08 95       	ret
+	TWDR=data;			/* Copy data in TWI data register */
+	TWCR=(1<<TWEN)|(1<<TWINT);	/* Enable TWI and clear interrupt flag */
+	while(!(TWCR&(1<<TWINT)));	/* Wait until TWI finish its current job */
+	status=TWSR&0xF8;		/* Read TWI status register */
+	if(status==0x28)		/* Check for data transmitted &ack received */
+	return 0;			/* Return 0 to indicate ack received */
+ 12a:	80 e0       	ldi	r24, 0x00	; 0
+ 12c:	08 95       	ret
+	if(status==0x30)		/* Check for data transmitted &nack received */
+	return 1;			/* Return 1 to indicate nack received */
+	else
+	return 2;			/* Else return 2 for data transmission failure */
+ 12e:	82 e0       	ldi	r24, 0x02	; 2
+}
+ 130:	08 95       	ret
+
+00000132 <I2C_Read_Ack>:
+//***********************************************************************************************************************************************************************************
+char I2C_Read_Ack()		/* I2C read ack function */
+{
+	TWCR=(1<<TWEN)|(1<<TWINT)|(1<<TWEA); /* Enable TWI, generation of ack */
+ 132:	84 ec       	ldi	r24, 0xC4	; 196
+ 134:	86 bf       	out	0x36, r24	; 54
+	while(!(TWCR&(1<<TWINT)));	/* Wait until TWI finish its current job */
+ 136:	06 b6       	in	r0, 0x36	; 54
+ 138:	07 fe       	sbrs	r0, 7
+ 13a:	fd cf       	rjmp	.-6      	; 0x136 <I2C_Read_Ack+0x4>
+	return (TWDR);			/* Return received data */
+ 13c:	83 b1       	in	r24, 0x03	; 3
+}
+ 13e:	08 95       	ret
+
+00000140 <I2C_Read_Nack>:
+//***********************************************************************************************************************************************************************************
+char I2C_Read_Nack()		/* I2C read nack function */
+{
+	TWCR=(1<<TWEN)|(1<<TWINT);	/* Enable TWI and clear interrupt flag */
+ 140:	84 e8       	ldi	r24, 0x84	; 132
+ 142:	86 bf       	out	0x36, r24	; 54
+	while(!(TWCR&(1<<TWINT)));	/* Wait until TWI finish its current job */
+ 144:	06 b6       	in	r0, 0x36	; 54
+ 146:	07 fe       	sbrs	r0, 7
+ 148:	fd cf       	rjmp	.-6      	; 0x144 <I2C_Read_Nack+0x4>
+	return (TWDR);		/* Return received data */
+ 14a:	83 b1       	in	r24, 0x03	; 3
+}
+ 14c:	08 95       	ret
+
+0000014e <I2C_Stop>:
+//**********************************************************************************************************************************************************************
+void I2C_Stop()			/* I2C stop function */
+{
+	TWCR=(1<<TWSTO)|(1<<TWINT)|(1<<TWEN);/* Enable TWI, generate stop */
+ 14e:	84 e9       	ldi	r24, 0x94	; 148
+ 150:	86 bf       	out	0x36, r24	; 54
+	while(TWCR&(1<<TWSTO));	/* Wait until stop condition execution */
+ 152:	06 b6       	in	r0, 0x36	; 54
+ 154:	04 fc       	sbrc	r0, 4
+ 156:	fd cf       	rjmp	.-6      	; 0x152 <I2C_Stop+0x4>
+ 158:	08 95       	ret
+
+0000015a <lcd_command>:
+ *  Author: Ahmed
+ */ 
+#include "lcd_4bit.h"
+//**********************************************************************************************
+void lcd_command(unsigned char cmd){
+	lcd_PRT=(lcd_PRT & 0x0F)|(cmd & 0xF0);
+ 15a:	9b b3       	in	r25, 0x1b	; 27
+ 15c:	28 2f       	mov	r18, r24
+ 15e:	20 7f       	andi	r18, 0xF0	; 240
+ 160:	9f 70       	andi	r25, 0x0F	; 15
+ 162:	92 2b       	or	r25, r18
+ 164:	9b bb       	out	0x1b, r25	; 27
+	lcd_PRT&=~(1<<lcd_RS);
+ 166:	d8 98       	cbi	0x1b, 0	; 27
+	lcd_PRT&=~(1<<lcd_RW);
+ 168:	d9 98       	cbi	0x1b, 1	; 27
+	lcd_PRT|=(1<<lcd_EN);
+ 16a:	da 9a       	sbi	0x1b, 2	; 27
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 16c:	35 e8       	ldi	r19, 0x85	; 133
+ 16e:	3a 95       	dec	r19
+ 170:	f1 f7       	brne	.-4      	; 0x16e <lcd_command+0x14>
+ 172:	00 00       	nop
+	_delay_us(50);
+	lcd_PRT&=~(1<<lcd_EN);
+ 174:	da 98       	cbi	0x1b, 2	; 27
+ 176:	95 e8       	ldi	r25, 0x85	; 133
+ 178:	9a 95       	dec	r25
+ 17a:	f1 f7       	brne	.-4      	; 0x178 <lcd_command+0x1e>
+ 17c:	00 00       	nop
+	_delay_us(50);
+	lcd_PRT =(lcd_PRT & 0x0F)|(cmd<<4);
+ 17e:	2b b3       	in	r18, 0x1b	; 27
+ 180:	30 e1       	ldi	r19, 0x10	; 16
+ 182:	83 9f       	mul	r24, r19
+ 184:	c0 01       	movw	r24, r0
+ 186:	11 24       	eor	r1, r1
+ 188:	92 2f       	mov	r25, r18
+ 18a:	9f 70       	andi	r25, 0x0F	; 15
+ 18c:	89 2b       	or	r24, r25
+ 18e:	8b bb       	out	0x1b, r24	; 27
+	lcd_PRT|=(1<<lcd_EN);
+ 190:	da 9a       	sbi	0x1b, 2	; 27
+ 192:	85 e8       	ldi	r24, 0x85	; 133
+ 194:	8a 95       	dec	r24
+ 196:	f1 f7       	brne	.-4      	; 0x194 <lcd_command+0x3a>
+ 198:	00 00       	nop
+	_delay_us(50);
+	lcd_PRT&=~(1<<lcd_EN);
+ 19a:	da 98       	cbi	0x1b, 2	; 27
+ 19c:	08 95       	ret
+
+0000019e <lcd_data>:
+
+}	
+//********************************************************************************************
+void lcd_data(unsigned char data){
+	lcd_PRT=(lcd_PRT & 0x0F)|(data & 0xF0);
+ 19e:	9b b3       	in	r25, 0x1b	; 27
+ 1a0:	28 2f       	mov	r18, r24
+ 1a2:	20 7f       	andi	r18, 0xF0	; 240
+ 1a4:	9f 70       	andi	r25, 0x0F	; 15
+ 1a6:	92 2b       	or	r25, r18
+ 1a8:	9b bb       	out	0x1b, r25	; 27
+	lcd_PRT|=(1<<lcd_RS);
+ 1aa:	d8 9a       	sbi	0x1b, 0	; 27
+	lcd_PRT&=~(1<<lcd_RW);
+ 1ac:	d9 98       	cbi	0x1b, 1	; 27
+	lcd_PRT|=(1<<lcd_EN);
+ 1ae:	da 9a       	sbi	0x1b, 2	; 27
+ 1b0:	35 e8       	ldi	r19, 0x85	; 133
+ 1b2:	3a 95       	dec	r19
+ 1b4:	f1 f7       	brne	.-4      	; 0x1b2 <lcd_data+0x14>
+ 1b6:	00 00       	nop
+	_delay_us(50);
+	lcd_PRT&=~(1<<lcd_EN);
+ 1b8:	da 98       	cbi	0x1b, 2	; 27
+ 1ba:	95 e8       	ldi	r25, 0x85	; 133
+ 1bc:	9a 95       	dec	r25
+ 1be:	f1 f7       	brne	.-4      	; 0x1bc <lcd_data+0x1e>
+ 1c0:	00 00       	nop
+	_delay_us(50);
+	lcd_PRT =(lcd_PRT & 0x0F)|(data<<4);
+ 1c2:	2b b3       	in	r18, 0x1b	; 27
+ 1c4:	30 e1       	ldi	r19, 0x10	; 16
+ 1c6:	83 9f       	mul	r24, r19
+ 1c8:	c0 01       	movw	r24, r0
+ 1ca:	11 24       	eor	r1, r1
+ 1cc:	92 2f       	mov	r25, r18
+ 1ce:	9f 70       	andi	r25, 0x0F	; 15
+ 1d0:	89 2b       	or	r24, r25
+ 1d2:	8b bb       	out	0x1b, r24	; 27
+	lcd_PRT|=(1<<lcd_EN);
+ 1d4:	da 9a       	sbi	0x1b, 2	; 27
+ 1d6:	87 ec       	ldi	r24, 0xC7	; 199
+ 1d8:	90 e0       	ldi	r25, 0x00	; 0
+ 1da:	01 97       	sbiw	r24, 0x01	; 1
+ 1dc:	f1 f7       	brne	.-4      	; 0x1da <lcd_data+0x3c>
+ 1de:	00 c0       	rjmp	.+0      	; 0x1e0 <lcd_data+0x42>
+ 1e0:	00 00       	nop
+	_delay_us(100);
+	lcd_PRT&=~(1<<lcd_EN);	
+ 1e2:	da 98       	cbi	0x1b, 2	; 27
+ 1e4:	08 95       	ret
+
+000001e6 <lcd_init>:
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 1e6:	8f e0       	ldi	r24, 0x0F	; 15
+ 1e8:	97 e2       	ldi	r25, 0x27	; 39
+ 1ea:	01 97       	sbiw	r24, 0x01	; 1
+ 1ec:	f1 f7       	brne	.-4      	; 0x1ea <lcd_init+0x4>
+ 1ee:	00 c0       	rjmp	.+0      	; 0x1f0 <lcd_init+0xa>
+ 1f0:	00 00       	nop
+//***********************************************************************************************
+//function for lcd initialize.
+//lcd_init();
+void lcd_init(){
+_delay_ms(5);
+	lcd_DDR|=0xff;
+ 1f2:	8a b3       	in	r24, 0x1a	; 26
+ 1f4:	8f ef       	ldi	r24, 0xFF	; 255
+ 1f6:	8a bb       	out	0x1a, r24	; 26
+	lcd_PRT&=~(1<<lcd_EN);
+ 1f8:	da 98       	cbi	0x1b, 2	; 27
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 1fa:	8f e9       	ldi	r24, 0x9F	; 159
+ 1fc:	9f e0       	ldi	r25, 0x0F	; 15
+ 1fe:	01 97       	sbiw	r24, 0x01	; 1
+ 200:	f1 f7       	brne	.-4      	; 0x1fe <lcd_init+0x18>
+ 202:	00 c0       	rjmp	.+0      	; 0x204 <lcd_init+0x1e>
+ 204:	00 00       	nop
+	_delay_us(2000);
+	lcd_command(0x33);
+ 206:	83 e3       	ldi	r24, 0x33	; 51
+ 208:	0e 94 ad 00 	call	0x15a	; 0x15a <lcd_command>
+ 20c:	95 e8       	ldi	r25, 0x85	; 133
+ 20e:	9a 95       	dec	r25
+ 210:	f1 f7       	brne	.-4      	; 0x20e <lcd_init+0x28>
+ 212:	00 00       	nop
+	_delay_us(50);
+	lcd_command(0x32);
+ 214:	82 e3       	ldi	r24, 0x32	; 50
+ 216:	0e 94 ad 00 	call	0x15a	; 0x15a <lcd_command>
+ 21a:	85 e8       	ldi	r24, 0x85	; 133
+ 21c:	8a 95       	dec	r24
+ 21e:	f1 f7       	brne	.-4      	; 0x21c <lcd_init+0x36>
+ 220:	00 00       	nop
+	_delay_us(50);
+	lcd_command(0x28);
+ 222:	88 e2       	ldi	r24, 0x28	; 40
+ 224:	0e 94 ad 00 	call	0x15a	; 0x15a <lcd_command>
+ 228:	95 e8       	ldi	r25, 0x85	; 133
+ 22a:	9a 95       	dec	r25
+ 22c:	f1 f7       	brne	.-4      	; 0x22a <lcd_init+0x44>
+ 22e:	00 00       	nop
+	_delay_us(50);
+	lcd_command(0x0E);
+ 230:	8e e0       	ldi	r24, 0x0E	; 14
+ 232:	0e 94 ad 00 	call	0x15a	; 0x15a <lcd_command>
+ 236:	85 e8       	ldi	r24, 0x85	; 133
+ 238:	8a 95       	dec	r24
+ 23a:	f1 f7       	brne	.-4      	; 0x238 <lcd_init+0x52>
+ 23c:	00 00       	nop
+	_delay_us(50);
+	lcd_command(0x01);
+ 23e:	81 e0       	ldi	r24, 0x01	; 1
+ 240:	0e 94 ad 00 	call	0x15a	; 0x15a <lcd_command>
+ 244:	8f e9       	ldi	r24, 0x9F	; 159
+ 246:	9f e0       	ldi	r25, 0x0F	; 15
+ 248:	01 97       	sbiw	r24, 0x01	; 1
+ 24a:	f1 f7       	brne	.-4      	; 0x248 <lcd_init+0x62>
+ 24c:	00 c0       	rjmp	.+0      	; 0x24e <lcd_init+0x68>
+ 24e:	00 00       	nop
+	_delay_us(2000);
+	lcd_command(0x06);
+ 250:	86 e0       	ldi	r24, 0x06	; 6
+ 252:	0e 94 ad 00 	call	0x15a	; 0x15a <lcd_command>
+ 256:	08 95       	ret
+
+00000258 <lcd_goto_xy>:
+//function to locate the position.
+//lcd_goto_xy(row,columm);
+//line 1 of lcd=row 1. ,line2 of lcd=row2
+//columm 1 of lcd =columm 1., columm 16 of lcd =columm 16.
+
+void lcd_goto_xy(unsigned char row,unsigned char columm){
+ 258:	cf 93       	push	r28
+ 25a:	df 93       	push	r29
+ 25c:	00 d0       	rcall	.+0      	; 0x25e <lcd_goto_xy+0x6>
+ 25e:	00 d0       	rcall	.+0      	; 0x260 <lcd_goto_xy+0x8>
+ 260:	cd b7       	in	r28, 0x3d	; 61
+ 262:	de b7       	in	r29, 0x3e	; 62
+	unsigned char fristcharadr[]={0x80,0xC0,0x90,0xD0};
+ 264:	90 e8       	ldi	r25, 0x80	; 128
+ 266:	99 83       	std	Y+1, r25	; 0x01
+ 268:	90 ec       	ldi	r25, 0xC0	; 192
+ 26a:	9a 83       	std	Y+2, r25	; 0x02
+ 26c:	90 e9       	ldi	r25, 0x90	; 144
+ 26e:	9b 83       	std	Y+3, r25	; 0x03
+ 270:	90 ed       	ldi	r25, 0xD0	; 208
+ 272:	9c 83       	std	Y+4, r25	; 0x04
+		lcd_command(fristcharadr[row-1]+(columm-1));
+ 274:	61 50       	subi	r22, 0x01	; 1
+ 276:	fe 01       	movw	r30, r28
+ 278:	e8 0f       	add	r30, r24
+ 27a:	f1 1d       	adc	r31, r1
+ 27c:	80 81       	ld	r24, Z
+ 27e:	86 0f       	add	r24, r22
+ 280:	0e 94 ad 00 	call	0x15a	; 0x15a <lcd_command>
+ 284:	87 ec       	ldi	r24, 0xC7	; 199
+ 286:	90 e0       	ldi	r25, 0x00	; 0
+ 288:	01 97       	sbiw	r24, 0x01	; 1
+ 28a:	f1 f7       	brne	.-4      	; 0x288 <lcd_goto_xy+0x30>
+ 28c:	00 c0       	rjmp	.+0      	; 0x28e <lcd_goto_xy+0x36>
+ 28e:	00 00       	nop
+		_delay_us(100);
+	}
+ 290:	0f 90       	pop	r0
+ 292:	0f 90       	pop	r0
+ 294:	0f 90       	pop	r0
+ 296:	0f 90       	pop	r0
+ 298:	df 91       	pop	r29
+ 29a:	cf 91       	pop	r28
+ 29c:	08 95       	ret
+
+0000029e <lcd_print>:
+//***********************************************************************************************************
+//function to put what u need.
+// lcd_print("hallo");
+ void lcd_print(char *text){
+ 29e:	cf 93       	push	r28
+ 2a0:	df 93       	push	r29
+ 2a2:	ec 01       	movw	r28, r24
+	while(*text>0){
+ 2a4:	88 81       	ld	r24, Y
+ 2a6:	88 23       	and	r24, r24
+ 2a8:	31 f0       	breq	.+12     	; 0x2b6 <lcd_print+0x18>
+ 2aa:	21 96       	adiw	r28, 0x01	; 1
+		lcd_data(*text++);
+ 2ac:	0e 94 cf 00 	call	0x19e	; 0x19e <lcd_data>
+	}
+//***********************************************************************************************************
+//function to put what u need.
+// lcd_print("hallo");
+ void lcd_print(char *text){
+	while(*text>0){
+ 2b0:	89 91       	ld	r24, Y+
+ 2b2:	81 11       	cpse	r24, r1
+ 2b4:	fb cf       	rjmp	.-10     	; 0x2ac <lcd_print+0xe>
+		lcd_data(*text++);
+	}
+}
+ 2b6:	df 91       	pop	r29
+ 2b8:	cf 91       	pop	r28
+ 2ba:	08 95       	ret
+
+000002bc <lcd_CLEAR>:
+
+//************************************************************************************************************
+//function to clear lcd. 
+//lcd_CLEAR();.
+void lcd_CLEAR(){
+	lcd_command(0x01);
+ 2bc:	81 e0       	ldi	r24, 0x01	; 1
+ 2be:	0e 94 ad 00 	call	0x15a	; 0x15a <lcd_command>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 2c2:	8f e9       	ldi	r24, 0x9F	; 159
+ 2c4:	9f e0       	ldi	r25, 0x0F	; 15
+ 2c6:	01 97       	sbiw	r24, 0x01	; 1
+ 2c8:	f1 f7       	brne	.-4      	; 0x2c6 <lcd_CLEAR+0xa>
+ 2ca:	00 c0       	rjmp	.+0      	; 0x2cc <lcd_CLEAR+0x10>
+ 2cc:	00 00       	nop
+ 2ce:	08 95       	ret
+
+000002d0 <RTC_Read_Clock>:
+		
+        //TODO:: Please write your application code 
+    }
+
+void RTC_Read_Clock(char read_clock_address)
+{
+ 2d0:	cf 93       	push	r28
+ 2d2:	c8 2f       	mov	r28, r24
+	I2C_Start(Device_Write_address);/* Start I2C communication with RTC */
+ 2d4:	80 ed       	ldi	r24, 0xD0	; 208
+ 2d6:	0e 94 4d 00 	call	0x9a	; 0x9a <I2C_Start>
+	I2C_Write(read_clock_address);	/* Write address to read */
+ 2da:	8c 2f       	mov	r24, r28
+ 2dc:	0e 94 87 00 	call	0x10e	; 0x10e <I2C_Write>
+	I2C_Repeated_Start(Device_Read_address);/* Repeated start with device read address */
+ 2e0:	81 ed       	ldi	r24, 0xD1	; 209
+ 2e2:	0e 94 6a 00 	call	0xd4	; 0xd4 <I2C_Repeated_Start>
+
+	second = I2C_Read_Ack();	/* Read second */
+ 2e6:	0e 94 99 00 	call	0x132	; 0x132 <I2C_Read_Ack>
+ 2ea:	80 93 e3 00 	sts	0x00E3, r24
+	minute = I2C_Read_Ack();	/* Read minute */
+ 2ee:	0e 94 99 00 	call	0x132	; 0x132 <I2C_Read_Ack>
+ 2f2:	80 93 e4 00 	sts	0x00E4, r24
+	hour = I2C_Read_Nack();		/* Read hour with Nack */
+ 2f6:	0e 94 a0 00 	call	0x140	; 0x140 <I2C_Read_Nack>
+ 2fa:	80 93 e8 00 	sts	0x00E8, r24
+	I2C_Stop();			/* Stop i2C communication */
+ 2fe:	0e 94 a7 00 	call	0x14e	; 0x14e <I2C_Stop>
+}
+ 302:	cf 91       	pop	r28
+ 304:	08 95       	ret
+
+00000306 <RTC_Clock_Write>:
+/* function for clock */
+
+void RTC_Clock_Write(char _hour, char _minute, char _second,char timeformat)
+{
+ 306:	1f 93       	push	r17
+ 308:	cf 93       	push	r28
+ 30a:	df 93       	push	r29
+ 30c:	d6 2f       	mov	r29, r22
+ 30e:	14 2f       	mov	r17, r20
+	_hour=timeformat|_hour;               // ox00 for 24 ,0x40 for AM ,0x60 for PM 
+ 310:	c2 2f       	mov	r28, r18
+ 312:	c8 2b       	or	r28, r24
+	I2C_Start(Device_Write_address);/* Start I2C communication with RTC */
+ 314:	80 ed       	ldi	r24, 0xD0	; 208
+ 316:	0e 94 4d 00 	call	0x9a	; 0x9a <I2C_Start>
+	I2C_Write(0x00);			/* Write 0 address for second */
+ 31a:	80 e0       	ldi	r24, 0x00	; 0
+ 31c:	0e 94 87 00 	call	0x10e	; 0x10e <I2C_Write>
+	I2C_Write(_second);		/* Write second on 00 location */
+ 320:	81 2f       	mov	r24, r17
+ 322:	0e 94 87 00 	call	0x10e	; 0x10e <I2C_Write>
+	I2C_Write(_minute);		/* Write minute on 01(auto increment) location */
+ 326:	8d 2f       	mov	r24, r29
+ 328:	0e 94 87 00 	call	0x10e	; 0x10e <I2C_Write>
+	I2C_Write(_hour);		/* Write hour on 02 location */
+ 32c:	8c 2f       	mov	r24, r28
+ 32e:	0e 94 87 00 	call	0x10e	; 0x10e <I2C_Write>
+	I2C_Stop();			/* Stop I2C communication */
+ 332:	0e 94 a7 00 	call	0x14e	; 0x14e <I2C_Stop>
+}
+ 336:	df 91       	pop	r29
+ 338:	cf 91       	pop	r28
+ 33a:	1f 91       	pop	r17
+ 33c:	08 95       	ret
+
+0000033e <RTC_Read_Calendar>:
+	I2C_Write(_year);		/* Write year on 06 location */
+	I2C_Stop();			/* Stop I2C communication */
+}
+
+void RTC_Read_Calendar(char read_calendar_address)
+{
+ 33e:	cf 93       	push	r28
+ 340:	c8 2f       	mov	r28, r24
+	I2C_Start(Device_Write_address);
+ 342:	80 ed       	ldi	r24, 0xD0	; 208
+ 344:	0e 94 4d 00 	call	0x9a	; 0x9a <I2C_Start>
+	I2C_Write(read_calendar_address);
+ 348:	8c 2f       	mov	r24, r28
+ 34a:	0e 94 87 00 	call	0x10e	; 0x10e <I2C_Write>
+	I2C_Repeated_Start(Device_Read_address);
+ 34e:	81 ed       	ldi	r24, 0xD1	; 209
+ 350:	0e 94 6a 00 	call	0xd4	; 0xd4 <I2C_Repeated_Start>
+
+	day = I2C_Read_Ack();		/* Read day */
+ 354:	0e 94 99 00 	call	0x132	; 0x132 <I2C_Read_Ack>
+ 358:	80 93 f5 00 	sts	0x00F5, r24
+	date = I2C_Read_Ack();		/* Read date */
+ 35c:	0e 94 99 00 	call	0x132	; 0x132 <I2C_Read_Ack>
+ 360:	80 93 f6 00 	sts	0x00F6, r24
+	month = I2C_Read_Ack();		/* Read month */
+ 364:	0e 94 99 00 	call	0x132	; 0x132 <I2C_Read_Ack>
+ 368:	80 93 e2 00 	sts	0x00E2, r24
+	year = I2C_Read_Nack();		/* Read the year with Nack */
+ 36c:	0e 94 a0 00 	call	0x140	; 0x140 <I2C_Read_Nack>
+ 370:	80 93 f4 00 	sts	0x00F4, r24
+	I2C_Stop();			/* Stop i2C communication */
+ 374:	0e 94 a7 00 	call	0x14e	; 0x14e <I2C_Stop>
+}
+ 378:	cf 91       	pop	r28
+ 37a:	08 95       	ret
+
+0000037c <main>:
+char* monthe[13]={"jun","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"};
+char* days[8]={"Sun","Mon","Tue","Wed","Thu","Fri","Sat"};		
+char nod[3];
+int m;
+int main(void)
+{   I2C_Init();
+ 37c:	0e 94 49 00 	call	0x92	; 0x92 <I2C_Init>
+	lcd_init();
+ 380:	0e 94 f3 00 	call	0x1e6	; 0x1e6 <lcd_init>
+RTC_Clock_Write(0X11,0X59,0X56,0x40);
+ 384:	20 e4       	ldi	r18, 0x40	; 64
+ 386:	46 e5       	ldi	r20, 0x56	; 86
+ 388:	69 e5       	ldi	r22, 0x59	; 89
+ 38a:	81 e1       	ldi	r24, 0x11	; 17
+ 38c:	0e 94 83 01 	call	0x306	; 0x306 <RTC_Clock_Write>
+    while(1)
+    { RTC_Read_Clock(0x00);
+	  time[0]=MSB(hour&0b00011111);
+ 390:	0f 2e       	mov	r0, r31
+ 392:	f9 ee       	ldi	r31, 0xE9	; 233
+ 394:	ef 2e       	mov	r14, r31
+ 396:	f0 e0       	ldi	r31, 0x00	; 0
+ 398:	ff 2e       	mov	r15, r31
+ 39a:	f0 2d       	mov	r31, r0
+	  time[1]=LSB(hour);
+ 39c:	0f 2e       	mov	r0, r31
+ 39e:	fa ee       	ldi	r31, 0xEA	; 234
+ 3a0:	af 2e       	mov	r10, r31
+ 3a2:	f0 e0       	ldi	r31, 0x00	; 0
+ 3a4:	bf 2e       	mov	r11, r31
+ 3a6:	f0 2d       	mov	r31, r0
+		lcd_print("PM");}
+        else if (!(hour&(1<<5)))
+		{			 
+		lcd_goto_xy(1,15);
+		lcd_print("AM");}
+	  time[2]=':';
+ 3a8:	0f 2e       	mov	r0, r31
+ 3aa:	fb ee       	ldi	r31, 0xEB	; 235
+ 3ac:	cf 2e       	mov	r12, r31
+ 3ae:	f0 e0       	ldi	r31, 0x00	; 0
+ 3b0:	df 2e       	mov	r13, r31
+ 3b2:	f0 2d       	mov	r31, r0
+	  time[3]=MSB(minute);
+ 3b4:	0f 2e       	mov	r0, r31
+ 3b6:	fc ee       	ldi	r31, 0xEC	; 236
+ 3b8:	8f 2e       	mov	r8, r31
+ 3ba:	f0 e0       	ldi	r31, 0x00	; 0
+ 3bc:	9f 2e       	mov	r9, r31
+ 3be:	f0 2d       	mov	r31, r0
+	  time[4]=LSB(minute);
+ 3c0:	0f 2e       	mov	r0, r31
+ 3c2:	fd ee       	ldi	r31, 0xED	; 237
+ 3c4:	6f 2e       	mov	r6, r31
+ 3c6:	f0 e0       	ldi	r31, 0x00	; 0
+ 3c8:	7f 2e       	mov	r7, r31
+ 3ca:	f0 2d       	mov	r31, r0
+	  time[5]=':';
+ 3cc:	0f 2e       	mov	r0, r31
+ 3ce:	fe ee       	ldi	r31, 0xEE	; 238
+ 3d0:	4f 2e       	mov	r4, r31
+ 3d2:	f0 e0       	ldi	r31, 0x00	; 0
+ 3d4:	5f 2e       	mov	r5, r31
+ 3d6:	f0 2d       	mov	r31, r0
+	  time[6]=MSB(second);
+ 3d8:	0f 2e       	mov	r0, r31
+ 3da:	ff ee       	ldi	r31, 0xEF	; 239
+ 3dc:	2f 2e       	mov	r2, r31
+ 3de:	f0 e0       	ldi	r31, 0x00	; 0
+ 3e0:	3f 2e       	mov	r3, r31
+ 3e2:	f0 2d       	mov	r31, r0
+	
+		RTC_Read_Calendar(0x03);
+		  d=day;
+		  lcd_goto_xy(2,1);
+		  lcd_print(days[d-1]);
+		  dat[0]=MSB(date);
+ 3e4:	0e ed       	ldi	r16, 0xDE	; 222
+ 3e6:	10 e0       	ldi	r17, 0x00	; 0
+		  dat[1]=LSB(date);
+		  dat[2]=' ';
+		  nod[0]=MSB(month);
+ 3e8:	c5 ee       	ldi	r28, 0xE5	; 229
+ 3ea:	d0 e0       	ldi	r29, 0x00	; 0
+int main(void)
+{   I2C_Init();
+	lcd_init();
+RTC_Clock_Write(0X11,0X59,0X56,0x40);
+    while(1)
+    { RTC_Read_Clock(0x00);
+ 3ec:	80 e0       	ldi	r24, 0x00	; 0
+ 3ee:	0e 94 68 01 	call	0x2d0	; 0x2d0 <RTC_Read_Clock>
+	  time[0]=MSB(hour&0b00011111);
+ 3f2:	80 91 e8 00 	lds	r24, 0x00E8
+
+unsigned char LSB(unsigned char X){
+	return((X&0X0F) +'0');
+}
+unsigned char MSB(unsigned char x){
+	return((x>>4) +'0' );
+ 3f6:	84 fb       	bst	r24, 4
+ 3f8:	99 27       	eor	r25, r25
+ 3fa:	90 f9       	bld	r25, 0
+ 3fc:	90 5d       	subi	r25, 0xD0	; 208
+{   I2C_Init();
+	lcd_init();
+RTC_Clock_Write(0X11,0X59,0X56,0x40);
+    while(1)
+    { RTC_Read_Clock(0x00);
+	  time[0]=MSB(hour&0b00011111);
+ 3fe:	f7 01       	movw	r30, r14
+ 400:	90 83       	st	Z, r25
+	year = I2C_Read_Nack();		/* Read the year with Nack */
+	I2C_Stop();			/* Stop i2C communication */
+}
+
+unsigned char LSB(unsigned char X){
+	return((X&0X0F) +'0');
+ 402:	98 2f       	mov	r25, r24
+ 404:	9f 70       	andi	r25, 0x0F	; 15
+ 406:	90 5d       	subi	r25, 0xD0	; 208
+	lcd_init();
+RTC_Clock_Write(0X11,0X59,0X56,0x40);
+    while(1)
+    { RTC_Read_Clock(0x00);
+	  time[0]=MSB(hour&0b00011111);
+	  time[1]=LSB(hour);
+ 408:	f5 01       	movw	r30, r10
+ 40a:	90 83       	st	Z, r25
+		  if ((hour&(1<<5)))
+ 40c:	85 ff       	sbrs	r24, 5
+ 40e:	09 c0       	rjmp	.+18     	; 0x422 <main+0xa6>
+		{ lcd_goto_xy(1,15);
+ 410:	6f e0       	ldi	r22, 0x0F	; 15
+ 412:	81 e0       	ldi	r24, 0x01	; 1
+ 414:	0e 94 2c 01 	call	0x258	; 0x258 <lcd_goto_xy>
+		lcd_print("PM");}
+ 418:	8a e8       	ldi	r24, 0x8A	; 138
+ 41a:	90 e0       	ldi	r25, 0x00	; 0
+ 41c:	0e 94 4f 01 	call	0x29e	; 0x29e <lcd_print>
+ 420:	08 c0       	rjmp	.+16     	; 0x432 <main+0xb6>
+        else if (!(hour&(1<<5)))
+		{			 
+		lcd_goto_xy(1,15);
+ 422:	6f e0       	ldi	r22, 0x0F	; 15
+ 424:	81 e0       	ldi	r24, 0x01	; 1
+ 426:	0e 94 2c 01 	call	0x258	; 0x258 <lcd_goto_xy>
+		lcd_print("AM");}
+ 42a:	8d e8       	ldi	r24, 0x8D	; 141
+ 42c:	90 e0       	ldi	r25, 0x00	; 0
+ 42e:	0e 94 4f 01 	call	0x29e	; 0x29e <lcd_print>
+	  time[2]=':';
+ 432:	8a e3       	ldi	r24, 0x3A	; 58
+ 434:	f6 01       	movw	r30, r12
+ 436:	80 83       	st	Z, r24
+	  time[3]=MSB(minute);
+ 438:	90 91 e4 00 	lds	r25, 0x00E4
+
+unsigned char LSB(unsigned char X){
+	return((X&0X0F) +'0');
+}
+unsigned char MSB(unsigned char x){
+	return((x>>4) +'0' );
+ 43c:	29 2f       	mov	r18, r25
+ 43e:	22 95       	swap	r18
+ 440:	2f 70       	andi	r18, 0x0F	; 15
+ 442:	20 5d       	subi	r18, 0xD0	; 208
+        else if (!(hour&(1<<5)))
+		{			 
+		lcd_goto_xy(1,15);
+		lcd_print("AM");}
+	  time[2]=':';
+	  time[3]=MSB(minute);
+ 444:	f4 01       	movw	r30, r8
+ 446:	20 83       	st	Z, r18
+	year = I2C_Read_Nack();		/* Read the year with Nack */
+	I2C_Stop();			/* Stop i2C communication */
+}
+
+unsigned char LSB(unsigned char X){
+	return((X&0X0F) +'0');
+ 448:	9f 70       	andi	r25, 0x0F	; 15
+ 44a:	90 5d       	subi	r25, 0xD0	; 208
+		{			 
+		lcd_goto_xy(1,15);
+		lcd_print("AM");}
+	  time[2]=':';
+	  time[3]=MSB(minute);
+	  time[4]=LSB(minute);
+ 44c:	f3 01       	movw	r30, r6
+ 44e:	90 83       	st	Z, r25
+	  time[5]=':';
+ 450:	f2 01       	movw	r30, r4
+ 452:	80 83       	st	Z, r24
+	  time[6]=MSB(second);
+ 454:	80 91 e3 00 	lds	r24, 0x00E3
+
+unsigned char LSB(unsigned char X){
+	return((X&0X0F) +'0');
+}
+unsigned char MSB(unsigned char x){
+	return((x>>4) +'0' );
+ 458:	98 2f       	mov	r25, r24
+ 45a:	92 95       	swap	r25
+ 45c:	9f 70       	andi	r25, 0x0F	; 15
+ 45e:	90 5d       	subi	r25, 0xD0	; 208
+		lcd_print("AM");}
+	  time[2]=':';
+	  time[3]=MSB(minute);
+	  time[4]=LSB(minute);
+	  time[5]=':';
+	  time[6]=MSB(second);
+ 460:	f1 01       	movw	r30, r2
+ 462:	90 83       	st	Z, r25
+	year = I2C_Read_Nack();		/* Read the year with Nack */
+	I2C_Stop();			/* Stop i2C communication */
+}
+
+unsigned char LSB(unsigned char X){
+	return((X&0X0F) +'0');
+ 464:	8f 70       	andi	r24, 0x0F	; 15
+ 466:	80 5d       	subi	r24, 0xD0	; 208
+	  time[2]=':';
+	  time[3]=MSB(minute);
+	  time[4]=LSB(minute);
+	  time[5]=':';
+	  time[6]=MSB(second);
+	  time[7]=LSB(second);
+ 468:	e0 ef       	ldi	r30, 0xF0	; 240
+ 46a:	f0 e0       	ldi	r31, 0x00	; 0
+ 46c:	80 83       	st	Z, r24
+	  lcd_goto_xy(1,1);
+ 46e:	61 e0       	ldi	r22, 0x01	; 1
+ 470:	81 e0       	ldi	r24, 0x01	; 1
+ 472:	0e 94 2c 01 	call	0x258	; 0x258 <lcd_goto_xy>
+	  lcd_print("TIME:");
+ 476:	80 e9       	ldi	r24, 0x90	; 144
+ 478:	90 e0       	ldi	r25, 0x00	; 0
+ 47a:	0e 94 4f 01 	call	0x29e	; 0x29e <lcd_print>
+	    lcd_goto_xy(1,6);
+ 47e:	66 e0       	ldi	r22, 0x06	; 6
+ 480:	81 e0       	ldi	r24, 0x01	; 1
+ 482:	0e 94 2c 01 	call	0x258	; 0x258 <lcd_goto_xy>
+		lcd_print(time);
+ 486:	c7 01       	movw	r24, r14
+ 488:	0e 94 4f 01 	call	0x29e	; 0x29e <lcd_print>
+		
+	
+		RTC_Read_Calendar(0x03);
+ 48c:	83 e0       	ldi	r24, 0x03	; 3
+ 48e:	0e 94 9f 01 	call	0x33e	; 0x33e <RTC_Read_Calendar>
+		  d=day;
+ 492:	80 91 f5 00 	lds	r24, 0x00F5
+ 496:	90 e0       	ldi	r25, 0x00	; 0
+ 498:	90 93 f3 00 	sts	0x00F3, r25
+ 49c:	80 93 f2 00 	sts	0x00F2, r24
+		  lcd_goto_xy(2,1);
+ 4a0:	61 e0       	ldi	r22, 0x01	; 1
+ 4a2:	82 e0       	ldi	r24, 0x02	; 2
+ 4a4:	0e 94 2c 01 	call	0x258	; 0x258 <lcd_goto_xy>
+		  lcd_print(days[d-1]);
+ 4a8:	e0 91 f2 00 	lds	r30, 0x00F2
+ 4ac:	f0 91 f3 00 	lds	r31, 0x00F3
+ 4b0:	ee 0f       	add	r30, r30
+ 4b2:	ff 1f       	adc	r31, r31
+ 4b4:	e2 5a       	subi	r30, 0xA2	; 162
+ 4b6:	ff 4f       	sbci	r31, 0xFF	; 255
+ 4b8:	80 81       	ld	r24, Z
+ 4ba:	91 81       	ldd	r25, Z+1	; 0x01
+ 4bc:	0e 94 4f 01 	call	0x29e	; 0x29e <lcd_print>
+		  dat[0]=MSB(date);
+ 4c0:	80 91 f6 00 	lds	r24, 0x00F6
+
+unsigned char LSB(unsigned char X){
+	return((X&0X0F) +'0');
+}
+unsigned char MSB(unsigned char x){
+	return((x>>4) +'0' );
+ 4c4:	98 2f       	mov	r25, r24
+ 4c6:	92 95       	swap	r25
+ 4c8:	9f 70       	andi	r25, 0x0F	; 15
+ 4ca:	90 5d       	subi	r25, 0xD0	; 208
+	
+		RTC_Read_Calendar(0x03);
+		  d=day;
+		  lcd_goto_xy(2,1);
+		  lcd_print(days[d-1]);
+		  dat[0]=MSB(date);
+ 4cc:	f8 01       	movw	r30, r16
+ 4ce:	90 83       	st	Z, r25
+	year = I2C_Read_Nack();		/* Read the year with Nack */
+	I2C_Stop();			/* Stop i2C communication */
+}
+
+unsigned char LSB(unsigned char X){
+	return((X&0X0F) +'0');
+ 4d0:	8f 70       	andi	r24, 0x0F	; 15
+ 4d2:	80 5d       	subi	r24, 0xD0	; 208
+		RTC_Read_Calendar(0x03);
+		  d=day;
+		  lcd_goto_xy(2,1);
+		  lcd_print(days[d-1]);
+		  dat[0]=MSB(date);
+		  dat[1]=LSB(date);
+ 4d4:	ef ed       	ldi	r30, 0xDF	; 223
+ 4d6:	f0 e0       	ldi	r31, 0x00	; 0
+ 4d8:	80 83       	st	Z, r24
+		  dat[2]=' ';
+ 4da:	80 e2       	ldi	r24, 0x20	; 32
+ 4dc:	e0 ee       	ldi	r30, 0xE0	; 224
+ 4de:	f0 e0       	ldi	r31, 0x00	; 0
+ 4e0:	80 83       	st	Z, r24
+		  nod[0]=MSB(month);
+ 4e2:	80 91 e2 00 	lds	r24, 0x00E2
+
+unsigned char LSB(unsigned char X){
+	return((X&0X0F) +'0');
+}
+unsigned char MSB(unsigned char x){
+	return((x>>4) +'0' );
+ 4e6:	98 2f       	mov	r25, r24
+ 4e8:	92 95       	swap	r25
+ 4ea:	9f 70       	andi	r25, 0x0F	; 15
+ 4ec:	90 5d       	subi	r25, 0xD0	; 208
+		  lcd_goto_xy(2,1);
+		  lcd_print(days[d-1]);
+		  dat[0]=MSB(date);
+		  dat[1]=LSB(date);
+		  dat[2]=' ';
+		  nod[0]=MSB(month);
+ 4ee:	98 83       	st	Y, r25
+	year = I2C_Read_Nack();		/* Read the year with Nack */
+	I2C_Stop();			/* Stop i2C communication */
+}
+
+unsigned char LSB(unsigned char X){
+	return((X&0X0F) +'0');
+ 4f0:	8f 70       	andi	r24, 0x0F	; 15
+ 4f2:	80 5d       	subi	r24, 0xD0	; 208
+		  lcd_print(days[d-1]);
+		  dat[0]=MSB(date);
+		  dat[1]=LSB(date);
+		  dat[2]=' ';
+		  nod[0]=MSB(month);
+		  nod[1]=LSB(month);
+ 4f4:	e6 ee       	ldi	r30, 0xE6	; 230
+ 4f6:	f0 e0       	ldi	r31, 0x00	; 0
+ 4f8:	80 83       	st	Z, r24
+		 m=atoi(nod);
+ 4fa:	ce 01       	movw	r24, r28
+ 4fc:	0e 94 a7 02 	call	0x54e	; 0x54e <atoi>
+ 500:	90 93 f8 00 	sts	0x00F8, r25
+ 504:	80 93 f7 00 	sts	0x00F7, r24
+		  lcd_goto_xy(2,5);
+ 508:	65 e0       	ldi	r22, 0x05	; 5
+ 50a:	82 e0       	ldi	r24, 0x02	; 2
+ 50c:	0e 94 2c 01 	call	0x258	; 0x258 <lcd_goto_xy>
+		  lcd_print(dat);
+ 510:	c8 01       	movw	r24, r16
+ 512:	0e 94 4f 01 	call	0x29e	; 0x29e <lcd_print>
+		  lcd_goto_xy(2,8);
+ 516:	68 e0       	ldi	r22, 0x08	; 8
+ 518:	82 e0       	ldi	r24, 0x02	; 2
+ 51a:	0e 94 2c 01 	call	0x258	; 0x258 <lcd_goto_xy>
+		  lcd_print(monthe[m-1]);
+ 51e:	e0 91 f7 00 	lds	r30, 0x00F7
+ 522:	f0 91 f8 00 	lds	r31, 0x00F8
+ 526:	ee 0f       	add	r30, r30
+ 528:	ff 1f       	adc	r31, r31
+ 52a:	e2 59       	subi	r30, 0x92	; 146
+ 52c:	ff 4f       	sbci	r31, 0xFF	; 255
+ 52e:	80 81       	ld	r24, Z
+ 530:	91 81       	ldd	r25, Z+1	; 0x01
+ 532:	0e 94 4f 01 	call	0x29e	; 0x29e <lcd_print>
+ 536:	ff ef       	ldi	r31, 0xFF	; 255
+ 538:	21 ee       	ldi	r18, 0xE1	; 225
+ 53a:	84 e0       	ldi	r24, 0x04	; 4
+ 53c:	f1 50       	subi	r31, 0x01	; 1
+ 53e:	20 40       	sbci	r18, 0x00	; 0
+ 540:	80 40       	sbci	r24, 0x00	; 0
+ 542:	e1 f7       	brne	.-8      	; 0x53c <main+0x1c0>
+ 544:	00 c0       	rjmp	.+0      	; 0x546 <main+0x1ca>
+ 546:	00 00       	nop
+		  _delay_ms(200);
+		  lcd_CLEAR();
+ 548:	0e 94 5e 01 	call	0x2bc	; 0x2bc <lcd_CLEAR>
+		}
+ 54c:	4f cf       	rjmp	.-354    	; 0x3ec <main+0x70>
+
+0000054e <atoi>:
+ 54e:	fc 01       	movw	r30, r24
+ 550:	88 27       	eor	r24, r24
+ 552:	99 27       	eor	r25, r25
+ 554:	e8 94       	clt
+ 556:	21 91       	ld	r18, Z+
+ 558:	20 32       	cpi	r18, 0x20	; 32
+ 55a:	e9 f3       	breq	.-6      	; 0x556 <atoi+0x8>
+ 55c:	29 30       	cpi	r18, 0x09	; 9
+ 55e:	10 f0       	brcs	.+4      	; 0x564 <atoi+0x16>
+ 560:	2e 30       	cpi	r18, 0x0E	; 14
+ 562:	c8 f3       	brcs	.-14     	; 0x556 <atoi+0x8>
+ 564:	2b 32       	cpi	r18, 0x2B	; 43
+ 566:	41 f0       	breq	.+16     	; 0x578 <atoi+0x2a>
+ 568:	2d 32       	cpi	r18, 0x2D	; 45
+ 56a:	39 f4       	brne	.+14     	; 0x57a <atoi+0x2c>
+ 56c:	68 94       	set
+ 56e:	04 c0       	rjmp	.+8      	; 0x578 <atoi+0x2a>
+ 570:	0e 94 c5 02 	call	0x58a	; 0x58a <__mulhi_const_10>
+ 574:	82 0f       	add	r24, r18
+ 576:	91 1d       	adc	r25, r1
+ 578:	21 91       	ld	r18, Z+
+ 57a:	20 53       	subi	r18, 0x30	; 48
+ 57c:	2a 30       	cpi	r18, 0x0A	; 10
+ 57e:	c0 f3       	brcs	.-16     	; 0x570 <atoi+0x22>
+ 580:	1e f4       	brtc	.+6      	; 0x588 <atoi+0x3a>
+ 582:	90 95       	com	r25
+ 584:	81 95       	neg	r24
+ 586:	9f 4f       	sbci	r25, 0xFF	; 255
+ 588:	08 95       	ret
+
+0000058a <__mulhi_const_10>:
+ 58a:	7a e0       	ldi	r23, 0x0A	; 10
+ 58c:	97 9f       	mul	r25, r23
+ 58e:	90 2d       	mov	r25, r0
+ 590:	87 9f       	mul	r24, r23
+ 592:	80 2d       	mov	r24, r0
+ 594:	91 0d       	add	r25, r1
+ 596:	11 24       	eor	r1, r1
+ 598:	08 95       	ret
+
+0000059a <_exit>:
+ 59a:	f8 94       	cli
+
+0000059c <__stop_program>:
+ 59c:	ff cf       	rjmp	.-2      	; 0x59c <__stop_program>
