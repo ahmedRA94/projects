@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Atmel Studio Solution File, Format Version 11.00
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "eeprom_I2C", "eeprom_I2C\eeprom_I2C.cproj", "{E6052F11-F4CA-48A9-9C8B-B0B24B88404E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E6052F11-F4CA-48A9-9C8B-B0B24B88404E}.Debug|AVR.ActiveCfg = Debug|AVR
+		{E6052F11-F4CA-48A9-9C8B-B0B24B88404E}.Debug|AVR.Build.0 = Debug|AVR
+		{E6052F11-F4CA-48A9-9C8B-B0B24B88404E}.Release|AVR.ActiveCfg = Release|AVR
+		{E6052F11-F4CA-48A9-9C8B-B0B24B88404E}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
