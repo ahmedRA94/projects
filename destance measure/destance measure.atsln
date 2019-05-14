@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Atmel Studio Solution File, Format Version 11.00
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "destance measure", "destance measure\destance measure.cproj", "{F994C784-48DE-41A8-BC77-C9DA99C27F15}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F994C784-48DE-41A8-BC77-C9DA99C27F15}.Debug|AVR.ActiveCfg = Debug|AVR
+		{F994C784-48DE-41A8-BC77-C9DA99C27F15}.Debug|AVR.Build.0 = Debug|AVR
+		{F994C784-48DE-41A8-BC77-C9DA99C27F15}.Release|AVR.ActiveCfg = Release|AVR
+		{F994C784-48DE-41A8-BC77-C9DA99C27F15}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
