@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Atmel Studio Solution File, Format Version 11.00
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "NOKIA 5510 LCD", "NOKIA 5510 LCD\NOKIA 5510 LCD.cproj", "{5183D5EF-4630-4CCB-9446-50C5182F8026}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5183D5EF-4630-4CCB-9446-50C5182F8026}.Debug|AVR.ActiveCfg = Debug|AVR
+		{5183D5EF-4630-4CCB-9446-50C5182F8026}.Debug|AVR.Build.0 = Debug|AVR
+		{5183D5EF-4630-4CCB-9446-50C5182F8026}.Release|AVR.ActiveCfg = Release|AVR
+		{5183D5EF-4630-4CCB-9446-50C5182F8026}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
