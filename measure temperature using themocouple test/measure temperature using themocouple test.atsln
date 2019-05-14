@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Atmel Studio Solution File, Format Version 11.00
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "measure temperature using themocouple test", "measure temperature using themocouple test\measure temperature using themocouple test.cproj", "{A873595D-343A-48FB-8238-80FA428EDC05}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A873595D-343A-48FB-8238-80FA428EDC05}.Debug|AVR.ActiveCfg = Debug|AVR
+		{A873595D-343A-48FB-8238-80FA428EDC05}.Debug|AVR.Build.0 = Debug|AVR
+		{A873595D-343A-48FB-8238-80FA428EDC05}.Release|AVR.ActiveCfg = Release|AVR
+		{A873595D-343A-48FB-8238-80FA428EDC05}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
