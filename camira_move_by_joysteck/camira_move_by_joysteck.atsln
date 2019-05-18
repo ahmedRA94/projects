@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Atmel Studio Solution File, Format Version 11.00
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "camira_move_by_joysteck", "camira_move_by_joysteck\camira_move_by_joysteck.cproj", "{12E09CE1-906C-4581-97F4-63C606957696}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{12E09CE1-906C-4581-97F4-63C606957696}.Debug|AVR.ActiveCfg = Debug|AVR
+		{12E09CE1-906C-4581-97F4-63C606957696}.Debug|AVR.Build.0 = Debug|AVR
+		{12E09CE1-906C-4581-97F4-63C606957696}.Release|AVR.ActiveCfg = Release|AVR
+		{12E09CE1-906C-4581-97F4-63C606957696}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

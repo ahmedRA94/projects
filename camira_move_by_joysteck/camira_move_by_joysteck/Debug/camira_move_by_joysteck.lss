@@ -1,0 +1,331 @@
+
+camira_move_by_joysteck.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000001bc  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00800060  000001bc  00000250  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000005  00800060  00800060  00000250  2**0
+                  ALLOC
+  3 .stab         000006cc  00000000  00000000  00000250  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  4 .stabstr      00000097  00000000  00000000  0000091c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .comment      0000002f  00000000  00000000  000009b3  2**0
+                  CONTENTS, READONLY
+  6 .debug_aranges 00000068  00000000  00000000  000009e2  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_info   000003f4  00000000  00000000  00000a4a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_abbrev 00000280  00000000  00000000  00000e3e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_line   00000315  00000000  00000000  000010be  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_frame  000000c8  00000000  00000000  000013d4  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_str    00000191  00000000  00000000  0000149c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_loc    00000192  00000000  00000000  0000162d  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 13 .debug_ranges 00000048  00000000  00000000  000017bf  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+   8:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+   c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  10:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  14:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  18:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  1c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  20:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  24:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  28:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  2c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  30:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  34:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  38:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  3c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  40:	0c 94 c0 00 	jmp	0x180	; 0x180 <__vector_16>
+  44:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  48:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  4c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  50:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_clear_bss>:
+  60:	20 e0       	ldi	r18, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	01 c0       	rjmp	.+2      	; 0x6a <.do_clear_bss_start>
+
+00000068 <.do_clear_bss_loop>:
+  68:	1d 92       	st	X+, r1
+
+0000006a <.do_clear_bss_start>:
+  6a:	a5 36       	cpi	r26, 0x65	; 101
+  6c:	b2 07       	cpc	r27, r18
+  6e:	e1 f7       	brne	.-8      	; 0x68 <.do_clear_bss_loop>
+  70:	0e 94 5c 00 	call	0xb8	; 0xb8 <main>
+  74:	0c 94 dc 00 	jmp	0x1b8	; 0x1b8 <_exit>
+
+00000078 <__bad_interrupt>:
+  78:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+0000007c <sevro_in>:
+		//TODO:: Please write your application code
+	}
+}
+
+void sevro_in(){
+	DDRD |= (1<<PD5)|(1<<PD4);	/* Make OC1A pin as output */
+  7c:	81 b3       	in	r24, 0x11	; 17
+  7e:	80 63       	ori	r24, 0x30	; 48
+  80:	81 bb       	out	0x11, r24	; 17
+	TCNT1 = 0;		/* Set timer1 count zero */
+  82:	1d bc       	out	0x2d, r1	; 45
+  84:	1c bc       	out	0x2c, r1	; 44
+	ICR1 = 2499;		/* Set TOP count for timer1 in ICR1 register */
+  86:	83 ec       	ldi	r24, 0xC3	; 195
+  88:	99 e0       	ldi	r25, 0x09	; 9
+  8a:	97 bd       	out	0x27, r25	; 39
+  8c:	86 bd       	out	0x26, r24	; 38
+	/* Set Fast PWM, TOP in ICR1, Clear OC1A on compare match, clk/64 */
+	TCCR1A = (1<<WGM11)|(1<<COM1A1)|(1<<COM1B1);
+  8e:	82 ea       	ldi	r24, 0xA2	; 162
+  90:	8f bd       	out	0x2f, r24	; 47
+	TCCR1B = (1<<WGM12)|(1<<WGM13)|(1<<CS10)|(1<<CS11);
+  92:	8b e1       	ldi	r24, 0x1B	; 27
+  94:	8e bd       	out	0x2e, r24	; 46
+  96:	08 95       	ret
+
+00000098 <sevr_set1>:
+}
+void sevr_set1(int *val)
+{
+	OCR1A=*val+125;
+  98:	fc 01       	movw	r30, r24
+  9a:	80 81       	ld	r24, Z
+  9c:	91 81       	ldd	r25, Z+1	; 0x01
+  9e:	83 58       	subi	r24, 0x83	; 131
+  a0:	9f 4f       	sbci	r25, 0xFF	; 255
+  a2:	9b bd       	out	0x2b, r25	; 43
+  a4:	8a bd       	out	0x2a, r24	; 42
+  a6:	08 95       	ret
+
+000000a8 <sevr_set2>:
+}
+void sevr_set2(int *vau){
+	OCR1B=*vau+125;
+  a8:	fc 01       	movw	r30, r24
+  aa:	80 81       	ld	r24, Z
+  ac:	91 81       	ldd	r25, Z+1	; 0x01
+  ae:	83 58       	subi	r24, 0x83	; 131
+  b0:	9f 4f       	sbci	r25, 0xFF	; 255
+  b2:	99 bd       	out	0x29, r25	; 41
+  b4:	88 bd       	out	0x28, r24	; 40
+  b6:	08 95       	ret
+
+000000b8 <main>:
+void sevro_in();
+void sevr_set1(int *val);
+void sevr_set2(int *val);
+
+int main(void)
+{  volatile int vx,vy;
+  b8:	cf 93       	push	r28
+  ba:	df 93       	push	r29
+  bc:	cd b7       	in	r28, 0x3d	; 61
+  be:	de b7       	in	r29, 0x3e	; 62
+  c0:	28 97       	sbiw	r28, 0x08	; 8
+  c2:	0f b6       	in	r0, 0x3f	; 63
+  c4:	f8 94       	cli
+  c6:	de bf       	out	0x3e, r29	; 62
+  c8:	0f be       	out	0x3f, r0	; 63
+  ca:	cd bf       	out	0x3d, r28	; 61
+	 int vax,vay;
+	ADC_Init();
+  cc:	0e 94 ad 00 	call	0x15a	; 0x15a <ADC_Init>
+	sevro_in();
+  d0:	0e 94 3e 00 	call	0x7c	; 0x7c <sevro_in>
+	while(1)
+	{ vx=adc_Read(1);
+  d4:	81 e0       	ldi	r24, 0x01	; 1
+  d6:	0e 94 b5 00 	call	0x16a	; 0x16a <adc_Read>
+  da:	28 2f       	mov	r18, r24
+  dc:	39 2f       	mov	r19, r25
+  de:	3a 83       	std	Y+2, r19	; 0x02
+  e0:	29 83       	std	Y+1, r18	; 0x01
+		vax=vx/8;
+  e2:	89 81       	ldd	r24, Y+1	; 0x01
+  e4:	9a 81       	ldd	r25, Y+2	; 0x02
+  e6:	99 23       	and	r25, r25
+  e8:	0c f4       	brge	.+2      	; 0xec <main+0x34>
+  ea:	07 96       	adiw	r24, 0x07	; 7
+  ec:	95 95       	asr	r25
+  ee:	87 95       	ror	r24
+  f0:	95 95       	asr	r25
+  f2:	87 95       	ror	r24
+  f4:	95 95       	asr	r25
+  f6:	87 95       	ror	r24
+  f8:	9e 83       	std	Y+6, r25	; 0x06
+  fa:	8d 83       	std	Y+5, r24	; 0x05
+		sevr_set1(&vax);
+  fc:	ce 01       	movw	r24, r28
+  fe:	05 96       	adiw	r24, 0x05	; 5
+ 100:	0e 94 4c 00 	call	0x98	; 0x98 <sevr_set1>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 104:	2f e7       	ldi	r18, 0x7F	; 127
+ 106:	89 ea       	ldi	r24, 0xA9	; 169
+ 108:	93 e0       	ldi	r25, 0x03	; 3
+ 10a:	21 50       	subi	r18, 0x01	; 1
+ 10c:	80 40       	sbci	r24, 0x00	; 0
+ 10e:	90 40       	sbci	r25, 0x00	; 0
+ 110:	e1 f7       	brne	.-8      	; 0x10a <main+0x52>
+ 112:	00 c0       	rjmp	.+0      	; 0x114 <main+0x5c>
+ 114:	00 00       	nop
+		_delay_ms(150);
+		vy=adc_Read(0);
+ 116:	80 e0       	ldi	r24, 0x00	; 0
+ 118:	0e 94 b5 00 	call	0x16a	; 0x16a <adc_Read>
+ 11c:	28 2f       	mov	r18, r24
+ 11e:	39 2f       	mov	r19, r25
+ 120:	3c 83       	std	Y+4, r19	; 0x04
+ 122:	2b 83       	std	Y+3, r18	; 0x03
+		vay=vy/8;
+ 124:	8b 81       	ldd	r24, Y+3	; 0x03
+ 126:	9c 81       	ldd	r25, Y+4	; 0x04
+ 128:	99 23       	and	r25, r25
+ 12a:	0c f4       	brge	.+2      	; 0x12e <main+0x76>
+ 12c:	07 96       	adiw	r24, 0x07	; 7
+ 12e:	95 95       	asr	r25
+ 130:	87 95       	ror	r24
+ 132:	95 95       	asr	r25
+ 134:	87 95       	ror	r24
+ 136:	95 95       	asr	r25
+ 138:	87 95       	ror	r24
+ 13a:	98 87       	std	Y+8, r25	; 0x08
+ 13c:	8f 83       	std	Y+7, r24	; 0x07
+		sevr_set2(&vay);
+ 13e:	ce 01       	movw	r24, r28
+ 140:	07 96       	adiw	r24, 0x07	; 7
+ 142:	0e 94 54 00 	call	0xa8	; 0xa8 <sevr_set2>
+ 146:	2f ef       	ldi	r18, 0xFF	; 255
+ 148:	80 e7       	ldi	r24, 0x70	; 112
+ 14a:	92 e0       	ldi	r25, 0x02	; 2
+ 14c:	21 50       	subi	r18, 0x01	; 1
+ 14e:	80 40       	sbci	r24, 0x00	; 0
+ 150:	90 40       	sbci	r25, 0x00	; 0
+ 152:	e1 f7       	brne	.-8      	; 0x14c <main+0x94>
+ 154:	00 c0       	rjmp	.+0      	; 0x156 <main+0x9e>
+ 156:	00 00       	nop
+ 158:	bd cf       	rjmp	.-134    	; 0xd4 <main+0x1c>
+
+0000015a <ADC_Init>:
+#include "ADC_LIB.h"
+//*****************************************************************************************************************************************************************
+//function to initialize ADC
+void ADC_Init()
+{  //PART A as input
+	DDRA =0x00;
+ 15a:	1a ba       	out	0x1a, r1	; 26
+	// AREF = AVcc
+	ADMUX = (1<<REFS0);
+ 15c:	80 e4       	ldi	r24, 0x40	; 64
+ 15e:	87 b9       	out	0x07, r24	; 7
+	
+	// ADC Enable and prescaler of 
+	ADCSRA |= (1<<ADEN)|(1<<ADIE)|(7<<ADPS0);
+ 160:	86 b1       	in	r24, 0x06	; 6
+ 162:	8f 68       	ori	r24, 0x8F	; 143
+ 164:	86 b9       	out	0x06, r24	; 6
+	sei();
+ 166:	78 94       	sei
+ 168:	08 95       	ret
+
+0000016a <adc_Read>:
+ {
+	 // select the corresponding channel 0~7
+	 // ANDing with '7' will always keep the value
+	 // of 'ch' between 0 and 7
+	 ch &= 0b00000111;  // AND operation with 7
+	 ADMUX = (ADMUX & 0xF8)|ch;     // clears the bottom 3 bits before ORing
+ 16a:	97 b1       	in	r25, 0x07	; 7
+  uint16_t adc_Read(uint8_t ch)
+ {
+	 // select the corresponding channel 0~7
+	 // ANDing with '7' will always keep the value
+	 // of 'ch' between 0 and 7
+	 ch &= 0b00000111;  // AND operation with 7
+ 16c:	87 70       	andi	r24, 0x07	; 7
+	 ADMUX = (ADMUX & 0xF8)|ch;     // clears the bottom 3 bits before ORing
+ 16e:	98 7f       	andi	r25, 0xF8	; 248
+ 170:	98 2b       	or	r25, r24
+ 172:	97 b9       	out	0x07, r25	; 7
+	 // start single conversion
+	 // write '1' to ADSC
+	 ADCSRA |= (1<<ADSC);
+ 174:	36 9a       	sbi	0x06, 6	; 6
+	 return (theTenBitResults);
+ }
+ 176:	80 91 61 00 	lds	r24, 0x0061
+ 17a:	90 91 62 00 	lds	r25, 0x0062
+ 17e:	08 95       	ret
+
+00000180 <__vector_16>:
+ //***************************************************************************************************************************************************************************
+ISR(ADC_vect)
+{
+ 180:	1f 92       	push	r1
+ 182:	0f 92       	push	r0
+ 184:	0f b6       	in	r0, 0x3f	; 63
+ 186:	0f 92       	push	r0
+ 188:	11 24       	eor	r1, r1
+ 18a:	2f 93       	push	r18
+ 18c:	3f 93       	push	r19
+ 18e:	8f 93       	push	r24
+ 190:	9f 93       	push	r25
+	uint8_t theLowADC = ADCL;
+ 192:	24 b1       	in	r18, 0x04	; 4
+	theTenBitResults= ADCH<<8|theLowADC;
+ 194:	35 b1       	in	r19, 0x05	; 5
+ 196:	93 2f       	mov	r25, r19
+ 198:	80 e0       	ldi	r24, 0x00	; 0
+ 19a:	82 2b       	or	r24, r18
+ 19c:	90 93 62 00 	sts	0x0062, r25
+ 1a0:	80 93 61 00 	sts	0x0061, r24
+	ADCSRA |= 1<<ADSC;
+ 1a4:	36 9a       	sbi	0x06, 6	; 6
+} 
+ 1a6:	9f 91       	pop	r25
+ 1a8:	8f 91       	pop	r24
+ 1aa:	3f 91       	pop	r19
+ 1ac:	2f 91       	pop	r18
+ 1ae:	0f 90       	pop	r0
+ 1b0:	0f be       	out	0x3f, r0	; 63
+ 1b2:	0f 90       	pop	r0
+ 1b4:	1f 90       	pop	r1
+ 1b6:	18 95       	reti
+
+000001b8 <_exit>:
+ 1b8:	f8 94       	cli
+
+000001ba <__stop_program>:
+ 1ba:	ff cf       	rjmp	.-2      	; 0x1ba <__stop_program>
